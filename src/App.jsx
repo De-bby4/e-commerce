@@ -8,9 +8,10 @@ function App() {
 
   return (
     <>
-      {/* <Hero /> */}
+      
       <Navbar />
-      {/* <BestSellers /> */}
+      <Hero />
+      <BestSellers />
       {/* <Footer /> */}
 
     </>

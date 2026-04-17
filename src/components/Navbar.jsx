@@ -21,10 +21,10 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full border-b border-pink-100 bg-red-500">
+    <nav className="w-full border-b border-pink-100 bg-black/70 backdrop-blur-sm fixed top-0 left-0 z-50">
       <div className="grid grid-cols-3 items-center px-8 md:px-12 lg:px-20 py-4">
         {/* Left: nav links */}
-        <ul className="flex items-center gap-6 text-sm text-pink-400">
+        <ul className="flex items-center gap-6 text-sm text-white">
           <li><a href="/" className="hover:text-pink-500">home</a></li>
           <li><a href="/shop" className="hover:text-pink-500">shop</a></li>
           <li><a href="/about" className="hover:text-pink-500">about</a></li>
@@ -32,12 +32,12 @@ export default function Navbar() {
         </ul>
 
         {/* Center: logo */}
-        <a href="/" className="justify-self-center text-2xl font-serif italic text-pink-400">
+        <a href="/" className="justify-self-center text-2xl font-serif italic text-white">
           Crovia
         </a>
 
         {/* Right: search + account + cart */}
-        <div className="flex items-center justify-end gap-5 text-sm text-pink-400">
+        <div className="flex items-center justify-end gap-5 text-sm text-white">
           <div className="flex items-center">
             <div
               className={`overflow-hidden transition-all duration-300 ease-in-out ${
@@ -51,7 +51,7 @@ export default function Navbar() {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleSubmit}
                 placeholder="search"
-                className="w-full border-b border-pink-300 bg-transparent pb-1 text-sm text-pink-500 placeholder:text-pink-300 focus:border-pink-500 focus:outline-none"
+                className="w-full border-b border-pink-300 bg-transparent pb-1 text-sm text-white placeholder:text-pink-300 focus:border-pink-500 focus:outline-none"
               />
             </div>
             <button
