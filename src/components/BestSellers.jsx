@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const products = [
   {
@@ -101,73 +102,66 @@ const ProductCard = ({ product }) => {
       onMouseLeave={() => setHovered(false)}
     >
       {/* Image area */}
-      <div className={`relative w-full aspect-[3/4] overflow-hidden ${product.bg}`}>
+      <Link to={`/product/${product.id}`} className="block">
+        <div className={`relative w-full aspect-[3/4] overflow-hidden ${product.bg}`}>
 
-        {/* Subtle grid texture */}
-        <div
-          className="absolute inset-0 opacity-40"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(201,169,110,0.02) 60px,rgba(201,169,110,0.02) 61px)",
-          }}
-        />
-
-        {/* Image placeholder — replace with <img> */}
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-[0.5rem] tracking-[0.2em] uppercase text-[rgba(201,169,110,0.2)]">
-            Product Image
-          </span>
-        </div>
-
-        {/* Badge */}
-        {product.badge && (
           <div
-            className={`absolute top-4 left-4 px-3 py-1 text-[0.5rem] font-semibold tracking-[0.18em] uppercase ${product.badgeColor}`}
-          >
-            {product.badge}
+            className="absolute inset-0 opacity-40"
+            style={{
+              backgroundImage:
+                "repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(201,169,110,0.02) 60px,rgba(201,169,110,0.02) 61px)",
+            }}
+          />
+
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-[0.5rem] tracking-[0.2em] uppercase text-[rgba(201,169,110,0.2)]">
+              Product Image
+            </span>
           </div>
-        )}
 
-        {/* Wishlist button */}
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            setWishlisted(!wishlisted);
-          }}
-          className={`absolute top-4 right-4 w-9 h-9 border flex items-center justify-center transition-all duration-300 bg-[rgba(0,0,0,0.45)] ${
-            wishlisted ? "border-[#c9a96e]" : "border-[rgba(201,169,110,0.3)]"
-          } ${
-            hovered ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
-          }`}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            className={`w-[13px] h-[13px] transition-all duration-300 ${
-              wishlisted
-                ? "fill-[#c9a96e] stroke-[#c9a96e]"
-                : "fill-none stroke-[#c9a96e]"
-            }`}
-            strokeWidth="1.5"
+          {product.badge && (
+            <div className={`absolute top-4 left-4 px-3 py-1 text-[0.5rem] font-semibold tracking-[0.18em] uppercase ${product.badgeColor}`}>
+              {product.badge}
+            </div>
+          )}
+
+          {/* Wishlist — stops propagation so it doesn't navigate */}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setWishlisted(!wishlisted);
+            }}
+            className={`absolute top-4 right-4 w-9 h-9 border flex items-center justify-center transition-all duration-300 bg-[rgba(0,0,0,0.45)] ${
+              wishlisted ? "border-[#c9a96e]" : "border-[rgba(201,169,110,0.3)]"
+            } ${hovered ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"}`}
           >
-            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
-          </svg>
-        </button>
+            <svg
+              viewBox="0 0 24 24"
+              className={`w-[13px] h-[13px] transition-all duration-300 ${
+                wishlisted ? "fill-[#c9a96e] stroke-[#c9a96e]" : "fill-none stroke-[#c9a96e]"
+              }`}
+              strokeWidth="1.5"
+            >
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+          </button>
 
-        {/* Quick Add — slides up on hover */}
-        <div
-          className={`absolute bottom-0 left-0 right-0 bg-[rgba(10,8,6,0.92)] py-4 text-center transition-all duration-300 ${
-            hovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
-          }`}
-        >
-          <span className="text-[0.58rem] font-semibold tracking-[0.25em] uppercase text-[#c9a96e]">
-            Quick Add
-          </span>
+          <div
+            className={`absolute bottom-0 left-0 right-0 bg-[rgba(10,8,6,0.92)] py-4 text-center transition-all duration-300 ${
+              hovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+            }`}
+          >
+            <span className="text-[0.58rem] font-semibold tracking-[0.25em] uppercase text-[#c9a96e]">
+              Quick View
+            </span>
+          </div>
         </div>
-      </div>
+      </Link>
 
       {/* Info */}
-      <div className="pt-4 pb-1">
-        <p className="font-['Cormorant_Garamond',serif] text-[1.05rem] font-light text-[#f5efe6] mb-1 leading-snug">
+      <Link to={`/product/${product.id}`} className="pt-4 pb-1 block">
+        <p className="font-['Cormorant_Garamond',serif] text-[1.05rem] font-light text-[#f5efe6] mb-1 leading-snug hover:text-[#e8d5a3] transition-colors duration-200">
           {product.name}
         </p>
         <div className="flex items-center gap-3">
@@ -180,7 +174,7 @@ const ProductCard = ({ product }) => {
             </span>
           )}
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
@@ -198,8 +192,6 @@ const BestSellers = () => {
 
       {/* Header row */}
       <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-14">
-
-        {/* Left — title */}
         <div>
           <div className="flex items-center gap-4 mb-3">
             <span className="w-8 h-px bg-[#c9a96e]" />
@@ -212,7 +204,6 @@ const BestSellers = () => {
           </h2>
         </div>
 
-        {/* Right — filter tabs */}
         <div className="flex border border-[rgba(201,169,110,0.18)]">
           {tabs.map((tab) => (
             <button
@@ -239,12 +230,12 @@ const BestSellers = () => {
 
       {/* View All */}
       <div className="flex justify-center mt-10">
-        <a
-          href="/all-products" 
+        <Link
+          to="/all-products"
           className="inline-block px-16 py-4 border border-[#c9a96e] text-[0.6rem] font-semibold tracking-[0.3em] uppercase text-[#c9a96e] transition-all duration-300 hover:bg-[#c9a96e] hover:text-[#0a0806]"
         >
           View All Products
-        </a>
+        </Link>
       </div>
     </section>
   );

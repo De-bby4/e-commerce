@@ -6,6 +6,7 @@ import Hero from './components/Hero'
 import BestSellers from './components/BestSellers'
 import About from './components/About'
 import AllProducts from './components/AllProductsPage'
+import ProductDetail from './components/ProductDetailPage'
 
 function Home() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/all-products" element={<AllProducts />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
         </Routes>
       </main>
 
