@@ -134,13 +134,11 @@ const ProductCard = ({ product }) => {
             e.stopPropagation();
             setWishlisted(!wishlisted);
           }}
-          className={`absolute top-4 right-4 w-9 h-9 border flex items-center justify-center transition-all duration-300 bg-[rgba(0,0,0,0.45)]
-            ${wishlisted
-              ? "border-[#c9a96e]"
-              : "border-[rgba(201,169,110,0.3)]"
-            }
-            ${hovered ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"}
-          `}
+          className={`absolute top-4 right-4 w-9 h-9 border flex items-center justify-center transition-all duration-300 bg-[rgba(0,0,0,0.45)] ${
+            wishlisted ? "border-[#c9a96e]" : "border-[rgba(201,169,110,0.3)]"
+          } ${
+            hovered ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-1"
+          }`}
         >
           <svg
             viewBox="0 0 24 24"
@@ -157,9 +155,9 @@ const ProductCard = ({ product }) => {
 
         {/* Quick Add — slides up on hover */}
         <div
-          className={`absolute bottom-0 left-0 right-0 bg-[rgba(10,8,6,0.92)] py-4 text-center transition-all duration-300
-            ${hovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}
-          `}
+          className={`absolute bottom-0 left-0 right-0 bg-[rgba(10,8,6,0.92)] py-4 text-center transition-all duration-300 ${
+            hovered ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"
+          }`}
         >
           <span className="text-[0.58rem] font-semibold tracking-[0.25em] uppercase text-[#c9a96e]">
             Quick Add
@@ -220,13 +218,11 @@ const BestSellers = () => {
             <button
               key={tab.value}
               onClick={() => setActiveTab(tab.value)}
-              className={`px-6 py-3 text-[0.58rem] font-semibold tracking-[0.2em] uppercase transition-all duration-200
-                ${
-                  activeTab === tab.value
-                    ? "bg-[#c9a96e] text-[#0a0806]"
-                    : "bg-transparent text-[#9e9082] hover:text-[#c9a96e]"
-                }
-              `}
+              className={`px-6 py-3 text-[0.58rem] font-semibold tracking-[0.2em] uppercase transition-all duration-200 ${
+                activeTab === tab.value
+                  ? "bg-[#c9a96e] text-[#0a0806]"
+                  : "bg-transparent text-[#9e9082] hover:text-[#c9a96e]"
+              }`}
             >
               {tab.label}
             </button>
@@ -250,7 +246,6 @@ const BestSellers = () => {
           View All Products
         </a>
       </div>
-
     </section>
   );
 };

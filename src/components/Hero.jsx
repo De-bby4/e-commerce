@@ -32,8 +32,8 @@ const Hero = () => {
 
           {/* Description */}
           <p className="text-[0.72rem] leading-[2] tracking-[0.05em] text-[#9e9082] max-w-sm mb-10">
-            Where timeless elegance meets modern silhouette. Curated pieces
-            for those who live boldly and dress with intention.
+            Where timeless elegance meets modern silhouette. Curated pieces for
+            those who live boldly and dress with intention.
           </p>
 
           {/* CTAs */}
@@ -66,6 +66,7 @@ const Hero = () => {
 
         {/* Right — image area */}
         <div className="relative bg-[#14100c] flex items-end justify-center overflow-hidden">
+
           {/* Placeholder grid texture */}
           <div
             className="absolute inset-0"
@@ -91,7 +92,6 @@ const Hero = () => {
           <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#0a0806] to-transparent" />
         </div>
       </div>
-
 
       {/* ── MOBILE LAYOUT (below lg): stacked ── */}
       <div className="flex flex-col lg:hidden min-h-screen">
@@ -143,8 +143,8 @@ const Hero = () => {
 
           {/* Description */}
           <p className="text-[0.68rem] leading-[1.9] tracking-[0.03em] text-[#9e9082] mb-8 max-w-xs">
-            Where timeless elegance meets modern silhouette. Curated pieces
-            for those who live boldly and dress with intention.
+            Where timeless elegance meets modern silhouette. Curated pieces for
+            those who live boldly and dress with intention.
           </p>
 
           {/* CTAs */}
