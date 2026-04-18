@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useSearchParams } from "react-router-dom";
 import { SlidersHorizontal, X, ChevronDown, ChevronUp } from "lucide-react";
 
 const allProducts = [
@@ -29,24 +30,23 @@ const CATEGORIES = [
 ];
 
 const PRICE_RANGES = [
-  { label: "Under $150",      min: 0,   max: 150 },
-  { label: "$150 – $300",     min: 150, max: 300 },
-  { label: "$300 – $500",     min: 300, max: 500 },
-  { label: "Over $500",       min: 500, max: Infinity },
+  { label: "Under $150",    min: 0,   max: 150 },
+  { label: "$150 – $300",   min: 150, max: 300 },
+  { label: "$300 – $500",   min: 300, max: 500 },
+  { label: "Over $500",     min: 500, max: Infinity },
 ];
 
 const SORT_OPTIONS = [
-  { label: "Featured",        value: "featured" },
+  { label: "Featured",          value: "featured" },
   { label: "Price: Low – High", value: "price_asc" },
   { label: "Price: High – Low", value: "price_desc" },
-  { label: "Newest",          value: "newest" },
+  { label: "Newest",            value: "newest" },
 ];
 
 const PAGE_SIZE = 8;
 
 const ProductCard = ({ product }) => {
   const [wishlisted, setWishlisted] = useState(false);
-
   return (
     <div className="group flex flex-col cursor-pointer">
       <div className={`relative w-full aspect-[3/4] overflow-hidden ${product.bg}`}>
@@ -57,19 +57,16 @@ const ProductCard = ({ product }) => {
               "repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px)",
           }}
         />
-        {/* Image placeholder — swap with <img> */}
         <div className="absolute inset-0 flex items-center justify-center">
           <span className="text-[0.46rem] tracking-[0.2em] uppercase text-[rgba(201,169,110,0.18)]">
             Product Image
           </span>
         </div>
-
         {product.badge && (
           <span className={`absolute top-3 left-3 px-3 py-[5px] text-[0.48rem] font-semibold tracking-[0.18em] uppercase ${product.badgeStyle}`}>
             {product.badge}
           </span>
         )}
-
         <button
           onClick={(e) => { e.stopPropagation(); setWishlisted(!wishlisted); }}
           className="absolute top-3 right-3 w-8 h-8 border bg-[rgba(0,0,0,0.5)] flex items-center justify-center
@@ -81,7 +78,6 @@ const ProductCard = ({ product }) => {
             <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
           </svg>
         </button>
-
         <div className="absolute bottom-0 left-0 right-0 py-3 bg-[rgba(10,8,6,0.92)]
           translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
           <p className="text-center text-[0.55rem] font-semibold tracking-[0.28em] uppercase text-[#c9a96e]">
@@ -89,7 +85,6 @@ const ProductCard = ({ product }) => {
           </p>
         </div>
       </div>
-
       <div className="pt-3">
         <p className="font-['Cormorant_Garamond',serif] text-[1rem] font-light leading-snug text-[#f0e8de] mb-1">
           {product.name}
@@ -115,7 +110,7 @@ const FilterSection = ({ title, children }) => {
     <div className="border-b border-[rgba(201,169,110,0.1)] py-5">
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center justify-between w-full mb-0 group"
+        className="flex items-center justify-between w-full group"
       >
         <span className="text-[0.55rem] font-semibold tracking-[0.3em] uppercase text-[#c9a96e]">
           {title}
@@ -133,16 +128,49 @@ const FilterSection = ({ title, children }) => {
 };
 
 export default function AllProducts() {
-  const [category, setCategory]       = useState("all");
-  const [priceRange, setPriceRange]   = useState(null);
-  const [sort, setSort]               = useState("featured");
-  const [visible, setVisible]         = useState(PAGE_SIZE);
-  const [drawerOpen, setDrawerOpen]   = useState(false);
-  const [sortOpen, setSortOpen]       = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const activeFiltersCount = (category !== "all" ? 1 : 0) + (priceRange !== null ? 1 : 0);
+  const [category,   setCategory]  = useState("all");
+  const [priceRange, setPriceRange] = useState(null);
+  const [sort,       setSort]       = useState("featured");
+  const [visible,    setVisible]    = useState(PAGE_SIZE);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [sortOpen,   setSortOpen]   = useState(false);
+
+  const sortRef = useRef(null);
+  const searchQuery = searchParams.get("q")?.toLowerCase().trim() || "";
+
+  useEffect(() => { setVisible(PAGE_SIZE); }, [searchQuery, category, priceRange, sort]);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (sortRef.current && !sortRef.current.contains(e.target)) {
+        setSortOpen(false);
+      }
+    };
+    if (sortOpen) document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [sortOpen]);
+
+  const clearSearch = () => {
+    const next = new URLSearchParams(searchParams);
+    next.delete("q");
+    setSearchParams(next);
+  };
+
+  const clearAll = () => {
+    setCategory("all");
+    setPriceRange(null);
+    clearSearch();
+  };
+
+  const activeFiltersCount =
+    (category !== "all" ? 1 : 0) +
+    (priceRange !== null ? 1 : 0) +
+    (searchQuery ? 1 : 0);
 
   const filtered = allProducts
+    .filter((p) => !searchQuery || p.name.toLowerCase().includes(searchQuery))
     .filter((p) => category === "all" || p.category === category)
     .filter((p) => !priceRange || (p.price >= priceRange.min && p.price < priceRange.max))
     .sort((a, b) => {
@@ -154,12 +182,6 @@ export default function AllProducts() {
 
   const shown = filtered.slice(0, visible);
 
-  const clearAll = () => {
-    setCategory("all");
-    setPriceRange(null);
-    setVisible(PAGE_SIZE);
-  };
-
   const Filters = () => (
     <div>
       <FilterSection title="Category">
@@ -167,13 +189,12 @@ export default function AllProducts() {
           {CATEGORIES.map((c) => (
             <li key={c.value}>
               <button
-                onClick={() => { setCategory(c.value); setVisible(PAGE_SIZE); }}
+                onClick={() => setCategory(c.value)}
                 className={`flex items-center gap-3 text-[0.65rem] tracking-[0.05em] transition-colors duration-200 w-full text-left
                   ${category === c.value ? "text-[#c9a96e]" : "text-[#9e9082] hover:text-[#e8d5a3]"}`}
               >
                 <span className={`w-[5px] h-[5px] rounded-full flex-shrink-0 transition-all duration-200
-                  ${category === c.value ? "bg-[#c9a96e]" : "bg-[rgba(201,169,110,0.2)]"}`}
-                />
+                  ${category === c.value ? "bg-[#c9a96e]" : "bg-[rgba(201,169,110,0.2)]"}`} />
                 {c.label}
               </button>
             </li>
@@ -186,13 +207,12 @@ export default function AllProducts() {
           {PRICE_RANGES.map((r, i) => (
             <li key={i}>
               <button
-                onClick={() => { setPriceRange(priceRange?.label === r.label ? null : r); setVisible(PAGE_SIZE); }}
+                onClick={() => setPriceRange(priceRange?.label === r.label ? null : r)}
                 className={`flex items-center gap-3 text-[0.65rem] tracking-[0.05em] transition-colors duration-200 w-full text-left
                   ${priceRange?.label === r.label ? "text-[#c9a96e]" : "text-[#9e9082] hover:text-[#e8d5a3]"}`}
               >
                 <span className={`w-[5px] h-[5px] rounded-full flex-shrink-0 transition-all duration-200
-                  ${priceRange?.label === r.label ? "bg-[#c9a96e]" : "bg-[rgba(201,169,110,0.2)]"}`}
-                />
+                  ${priceRange?.label === r.label ? "bg-[#c9a96e]" : "bg-[rgba(201,169,110,0.2)]"}`} />
                 {r.label}
               </button>
             </li>
@@ -205,7 +225,7 @@ export default function AllProducts() {
           onClick={clearAll}
           className="mt-6 text-[0.55rem] font-semibold tracking-[0.2em] uppercase text-[#9e9082] hover:text-[#c9a96e] transition-colors duration-200 flex items-center gap-2"
         >
-          <X size={11} /> Clear All Filters
+          <X size={11} /> Clear All
         </button>
       )}
     </div>
@@ -223,13 +243,13 @@ export default function AllProducts() {
           </span>
         </div>
         <h1 className="font-['Cormorant_Garamond',serif] text-[3rem] sm:text-[4rem] font-light leading-none text-[#f5efe6]">
-          All Products
+          {searchQuery ? `Results for "${searchQuery}"` : "All Products"}
         </h1>
       </div>
 
       <div className="flex px-6 sm:px-12 lg:px-20 py-10 gap-12">
 
-        {/* ── SIDEBAR (desktop) ── */}
+        {/* SIDEBAR */}
         <aside className="hidden lg:block w-52 flex-shrink-0 pt-1">
           <p className="text-[0.55rem] font-semibold tracking-[0.35em] uppercase text-[#f0e8de] mb-6">
             Filter
@@ -237,13 +257,11 @@ export default function AllProducts() {
           <Filters />
         </aside>
 
-        {/* ── MAIN CONTENT ── */}
+        {/* MAIN */}
         <div className="flex-1 min-w-0">
 
           {/* Toolbar */}
           <div className="flex items-center justify-between mb-8 gap-4 flex-wrap">
-
-            {/* Mobile filter button */}
             <button
               onClick={() => setDrawerOpen(true)}
               className="lg:hidden flex items-center gap-2 border border-[rgba(201,169,110,0.25)] px-4 py-2 text-[0.58rem] font-semibold tracking-[0.2em] uppercase text-[#9e9082] hover:border-[#c9a96e] hover:text-[#c9a96e] transition-all duration-200"
@@ -252,23 +270,21 @@ export default function AllProducts() {
               Filter {activeFiltersCount > 0 && `(${activeFiltersCount})`}
             </button>
 
-            {/* Results count */}
             <p className="text-[0.6rem] tracking-[0.08em] text-[#9e9082]">
               Showing <span className="text-[#e8d5a3]">{Math.min(visible, filtered.length)}</span> of{" "}
               <span className="text-[#e8d5a3]">{filtered.length}</span> products
             </p>
 
-            {/* Sort dropdown */}
-            <div className="relative">
+            <div className="relative" ref={sortRef}>
               <button
                 onClick={() => setSortOpen(!sortOpen)}
                 className="flex items-center gap-3 border border-[rgba(201,169,110,0.25)] px-4 py-2 text-[0.58rem] font-semibold tracking-[0.15em] uppercase text-[#9e9082] hover:border-[#c9a96e] hover:text-[#c9a96e] transition-all duration-200"
               >
                 {SORT_OPTIONS.find((o) => o.value === sort)?.label}
-                <ChevronDown size={12} />
+                <ChevronDown size={12} className={`transition-transform duration-200 ${sortOpen ? "rotate-180" : ""}`} />
               </button>
               {sortOpen && (
-                <div className="absolute right-0 top-full mt-1 w-48 bg-[#0d0b08] border border-[rgba(201,169,110,0.18)] z-20">
+                <div className="absolute left-0 sm:left-auto sm:right-0 top-full mt-1 w-48 bg-[#0d0b08] border border-[rgba(201,169,110,0.18)] z-30">
                   {SORT_OPTIONS.map((o) => (
                     <button
                       key={o.value}
@@ -287,6 +303,12 @@ export default function AllProducts() {
           {/* Active filter chips */}
           {activeFiltersCount > 0 && (
             <div className="flex flex-wrap gap-2 mb-8">
+              {searchQuery && (
+                <span className="flex items-center gap-2 border border-[rgba(201,169,110,0.25)] px-3 py-1 text-[0.55rem] tracking-[0.1em] text-[#c9a96e]">
+                  "{searchQuery}"
+                  <button onClick={clearSearch}><X size={10} /></button>
+                </span>
+              )}
               {category !== "all" && (
                 <span className="flex items-center gap-2 border border-[rgba(201,169,110,0.25)] px-3 py-1 text-[0.55rem] tracking-[0.1em] uppercase text-[#c9a96e]">
                   {CATEGORIES.find((c) => c.value === category)?.label}
@@ -304,7 +326,7 @@ export default function AllProducts() {
 
           {/* Grid */}
           {shown.length > 0 ? (
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-10">
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-4 gap-y-10 pb-10">
               {shown.map((p) => (
                 <ProductCard key={p.id} product={p} />
               ))}
@@ -315,20 +337,20 @@ export default function AllProducts() {
                 No results found
               </p>
               <p className="text-[0.62rem] tracking-[0.1em] text-[#9e9082]">
-                Try adjusting your filters
+                {searchQuery ? `No products match "${searchQuery}"` : "Try adjusting your filters"}
               </p>
               <button
                 onClick={clearAll}
                 className="mt-2 px-8 py-3 border border-[#c9a96e] text-[0.55rem] font-semibold tracking-[0.25em] uppercase text-[#c9a96e] hover:bg-[#c9a96e] hover:text-[#0a0806] transition-all duration-300"
               >
-                Clear Filters
+                Clear All
               </button>
             </div>
           )}
 
           {/* Load More */}
           {visible < filtered.length && (
-            <div className="flex justify-center mt-16">
+            <div className="flex justify-center mt-8 mb-16">
               <button
                 onClick={() => setVisible((v) => v + PAGE_SIZE)}
                 className="px-14 py-4 border border-[#c9a96e] text-[0.58rem] font-semibold tracking-[0.3em] uppercase text-[#c9a96e] transition-all duration-300 hover:bg-[#c9a96e] hover:text-[#0a0806]"
@@ -340,20 +362,13 @@ export default function AllProducts() {
         </div>
       </div>
 
-      {/* ── MOBILE FILTER DRAWER ── */}
+      {/* MOBILE DRAWER */}
       {drawerOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          {/* Backdrop */}
-          <div
-            className="absolute inset-0 bg-black/70"
-            onClick={() => setDrawerOpen(false)}
-          />
-          {/* Drawer */}
+          <div className="absolute inset-0 bg-black/70" onClick={() => setDrawerOpen(false)} />
           <div className="absolute left-0 top-0 bottom-0 w-72 bg-[#0d0b08] border-r border-[rgba(201,169,110,0.15)] px-7 py-8 overflow-y-auto">
             <div className="flex items-center justify-between mb-8">
-              <p className="text-[0.55rem] font-semibold tracking-[0.35em] uppercase text-[#f0e8de]">
-                Filter
-              </p>
+              <p className="text-[0.55rem] font-semibold tracking-[0.35em] uppercase text-[#f0e8de]">Filter</p>
               <button onClick={() => setDrawerOpen(false)}>
                 <X size={18} className="text-[#9e9082] hover:text-[#c9a96e] transition-colors" />
               </button>

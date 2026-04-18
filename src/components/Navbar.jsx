@@ -142,7 +142,7 @@ export default function Navbar() {
       >
         <ul className="flex flex-col gap-5 text-base tracking-wide">
           <li><Link to="/" onClick={() => setMenuOpen(false)} className="hover:text-[#c9a96e]">home</Link></li>
-          {/* <li><Link to="/shop" onClick={() => setMenuOpen(false)} className="hover:text-[#c9a96e]">shop</Link></li> */}
+          <li><Link to="/shop" onClick={() => setMenuOpen(false)} className="hover:text-[#c9a96e]">shop</Link></li>
           <li><Link to="/about" onClick={() => setMenuOpen(false)} className="hover:text-[#c9a96e]">about</Link></li>
           <li><Link to="/contact" onClick={() => setMenuOpen(false)} className="hover:text-[#c9a96e]">contact</Link></li>
         </ul>

@@ -231,16 +231,16 @@ const BestSellers = () => {
       </div>
 
       {/* Product Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-10 pb-10">
         {filtered.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
 
       {/* View All */}
-      <div className="flex justify-center mt-16">
+      <div className="flex justify-center mt-10">
         <a
-          href="/shop"
+          href="/all-products" 
           className="inline-block px-16 py-4 border border-[#c9a96e] text-[0.6rem] font-semibold tracking-[0.3em] uppercase text-[#c9a96e] transition-all duration-300 hover:bg-[#c9a96e] hover:text-[#0a0806]"
         >
           View All Products
