@@ -240,7 +240,7 @@ const BestSellers = () => {
       {/* View All */}
       <div className="flex justify-center mt-16">
         <a
-          href="#"
+          href="/shop"
           className="inline-block px-16 py-4 border border-[#c9a96e] text-[0.6rem] font-semibold tracking-[0.3em] uppercase text-[#c9a96e] transition-all duration-300 hover:bg-[#c9a96e] hover:text-[#0a0806]"
         >
           View All Products
