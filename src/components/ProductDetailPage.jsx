@@ -34,52 +34,63 @@ const AccordionItem = ({ title, children }) => {
   const [open, setOpen] = useState(false);
   return (
     <div className="border-b border-[rgba(201,169,110,0.12)]">
-      <button
-        onClick={() => setOpen(!open)}
-        className="flex items-center justify-between w-full py-4 text-left"
-      >
-        <span className="text-[0.6rem] font-semibold tracking-[0.25em] uppercase text-[#f0e8de]">
-          {title}
-        </span>
-        {open
-          ? <ChevronUp size={13} className="text-[#7a6240] flex-shrink-0" />
-          : <ChevronDown size={13} className="text-[#7a6240] flex-shrink-0" />
-        }
+      <button onClick={() => setOpen(!open)} className="flex items-center justify-between w-full py-4 text-left">
+        <span className="text-[0.6rem] font-semibold tracking-[0.25em] uppercase text-[#f0e8de]">{title}</span>
+        {open ? <ChevronUp size={13} className="text-[#7a6240] flex-shrink-0" /> : <ChevronDown size={13} className="text-[#7a6240] flex-shrink-0" />}
       </button>
       <div className={`overflow-hidden transition-all duration-300 ${open ? "max-h-40 pb-4" : "max-h-0"}`}>
-        <p className="text-[0.68rem] leading-[1.9] tracking-[0.03em] text-[#9e9082]">
-          {children}
-        </p>
+        <p className="text-[0.68rem] leading-[1.9] tracking-[0.03em] text-[#9e9082]">{children}</p>
       </div>
     </div>
   );
 };
 
-const RelatedCard = ({ product }) => (
-  <Link to={`/product/${product.id}`} className="group flex flex-col cursor-pointer">
-    <div className={`relative w-full aspect-[3/4] overflow-hidden ${product.bg}`}>
-      <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px)" }} />
-      <div className="absolute inset-0 flex items-center justify-center">
-        <span className="text-[0.44rem] tracking-[0.2em] uppercase text-[rgba(201,169,110,0.18)]">Product Image</span>
+const RelatedCard = ({ product }) => {
+  const [wishlisted, setWishlisted] = useState(false);
+
+  return (
+    <div className="group flex flex-col cursor-pointer">
+      <div className={`relative w-full aspect-[3/4] overflow-hidden ${product.bg}`}>
+        <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px)" }} />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-[0.44rem] tracking-[0.2em] uppercase text-[rgba(201,169,110,0.18)]">Product Image</span>
+        </div>
+        {product.badge && (
+          <span className={`absolute top-3 left-3 px-2 py-[4px] text-[0.45rem] font-semibold tracking-[0.15em] uppercase ${product.badgeStyle}`}>
+            {product.badge}
+          </span>
+        )}
+
+        {/* Wishlist — shows on hover */}
+        <button
+          onClick={(e) => { e.preventDefault(); e.stopPropagation(); setWishlisted(!wishlisted); }}
+          className={`absolute top-3 right-3 w-8 h-8 border flex items-center justify-center bg-[rgba(0,0,0,0.45)] transition-all duration-300
+            opacity-0 group-hover:opacity-100
+            ${wishlisted ? "border-[#c9a96e]" : "border-[rgba(201,169,110,0.3)]"}
+            hover:border-[#c9a96e]`}
+        >
+          <svg viewBox="0 0 24 24" strokeWidth="1.5"
+            className={`w-[13px] h-[13px] transition-all duration-200 ${wishlisted ? "fill-[#c9a96e] stroke-[#c9a96e]" : "fill-none stroke-[#c9a96e]"}`}>
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+          </svg>
+        </button>
+
+        <Link to={`/product/${product.id}`} className="absolute inset-0" />
+
+        <div className="absolute bottom-0 left-0 right-0 py-3 bg-[rgba(10,8,6,0.92)] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out pointer-events-none">
+          <p className="text-center text-[0.52rem] font-semibold tracking-[0.25em] uppercase text-[#c9a96e]">Quick View</p>
+        </div>
       </div>
-      {product.badge && (
-        <span className={`absolute top-3 left-3 px-2 py-[4px] text-[0.45rem] font-semibold tracking-[0.15em] uppercase ${product.badgeStyle}`}>
-          {product.badge}
-        </span>
-      )}
-      <div className="absolute bottom-0 left-0 right-0 py-3 bg-[rgba(10,8,6,0.92)] translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out">
-        <p className="text-center text-[0.52rem] font-semibold tracking-[0.25em] uppercase text-[#c9a96e]">Quick View</p>
-      </div>
+      <Link to={`/product/${product.id}`} className="pt-3 block">
+        <p className="font-['Cormorant_Garamond',serif] text-[0.95rem] font-light leading-snug text-[#f0e8de] mb-1 hover:text-[#e8d5a3] transition-colors">{product.name}</p>
+        <div className="flex items-center gap-2">
+          <span className="text-[0.65rem] font-medium text-[#c9a96e]">${product.price.toFixed(2)}</span>
+          {product.oldPrice && <span className="text-[0.6rem] text-[#9e9082] line-through">${product.oldPrice.toFixed(2)}</span>}
+        </div>
+      </Link>
     </div>
-    <div className="pt-3">
-      <p className="font-['Cormorant_Garamond',serif] text-[0.95rem] font-light leading-snug text-[#f0e8de] mb-1">{product.name}</p>
-      <div className="flex items-center gap-2">
-        <span className="text-[0.65rem] font-medium text-[#c9a96e]">${product.price.toFixed(2)}</span>
-        {product.oldPrice && <span className="text-[0.6rem] text-[#9e9082] line-through">${product.oldPrice.toFixed(2)}</span>}
-      </div>
-    </div>
-  </Link>
-);
+  );
+};
 
 export default function ProductDetail() {
   const { id } = useParams();
@@ -87,6 +98,7 @@ export default function ProductDetail() {
 
   const [selectedSize, setSelectedSize] = useState(null);
   const [added, setAdded] = useState(false);
+  const [wishlisted, setWishlisted] = useState(false); // ← added
   const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
 
   const related = allProducts
@@ -111,7 +123,6 @@ export default function ProductDetail() {
   return (
     <div className="min-h-screen bg-[#0a0806] font-['Montserrat',sans-serif] pt-24">
 
-      {/* Breadcrumb */}
       <div className="px-6 sm:px-12 lg:px-20 py-6 border-b border-[rgba(201,169,110,0.08)]">
         <Link to="/shop" className="flex items-center gap-2 text-[0.58rem] tracking-[0.15em] uppercase text-[#9e9082] hover:text-[#c9a96e] transition-colors duration-200 w-fit">
           <ArrowLeft size={13} />
@@ -119,10 +130,8 @@ export default function ProductDetail() {
         </Link>
       </div>
 
-      {/* MAIN */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 lg:gap-16 px-6 sm:px-12 lg:px-20 py-12 lg:py-16">
 
-        {/* LEFT — Image */}
         <div className="relative w-full aspect-[3/4] lg:aspect-auto lg:min-h-[70vh] overflow-hidden mb-10 lg:mb-0">
           <div className={`absolute inset-0 ${product.bg}`}>
             <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px),repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px)" }} />
@@ -138,7 +147,6 @@ export default function ProductDetail() {
           <div className="absolute top-5 right-5 bottom-5 left-5 border border-[rgba(201,169,110,0.06)] pointer-events-none" />
         </div>
 
-        {/* RIGHT — Details */}
         <div className="flex flex-col justify-center lg:py-8">
 
           <div className="flex items-center gap-3 mb-4">
@@ -162,22 +170,16 @@ export default function ProductDetail() {
             {product.description}
           </p>
 
-          {/* Size selector */}
           <div className="mb-24">
             <div className="flex items-center justify-between mb-4">
               <span className="text-[0.55rem] font-semibold tracking-[0.25em] uppercase text-[#f0e8de]">Size</span>
-              <button
-                onClick={() => setSizeGuideOpen(true)}
-                className="text-[0.52rem] tracking-[0.1em] text-[#9e9082] underline underline-offset-2 hover:text-[#c9a96e] transition-colors"
-              >
+              <button onClick={() => setSizeGuideOpen(true)} className="text-[0.52rem] tracking-[0.1em] text-[#9e9082] underline underline-offset-2 hover:text-[#c9a96e] transition-colors">
                 Size Guide
               </button>
             </div>
             <div className="flex flex-wrap gap-2">
               {product.sizes.map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setSelectedSize(size)}
+                <button key={size} onClick={() => setSelectedSize(size)}
                   className={`min-w-[2.8rem] px-3 py-2 text-[0.58rem] font-semibold tracking-[0.1em] border transition-all duration-200
                     ${selectedSize === size
                       ? "bg-[#c9a96e] border-[#c9a96e] text-[#0a0806]"
@@ -188,32 +190,33 @@ export default function ProductDetail() {
                 </button>
               ))}
             </div>
-            {!selectedSize && (
-              <p className="text-[0.52rem] tracking-[0.08em] text-[#7a6240] mt-3">Please select a size</p>
-            )}
+            {!selectedSize && <p className="text-[0.52rem] tracking-[0.08em] text-[#7a6240] mt-3">Please select a size</p>}
           </div>
 
-          {/* Add to Cart */}
-          <div className="pt-3 ">
+          <div className="pt-3">
+            <button onClick={handleAddToCart} disabled={!selectedSize}
+              className={`w-full py-4 text-[0.6rem] font-semibold tracking-[0.3em] uppercase transition-all duration-300
+                ${selectedSize
+                  ? added
+                    ? "bg-[#2a4a2a] border border-[#4a8a4a] text-[#8acc8a]"
+                    : "bg-[#c9a96e] text-[#0a0806] hover:bg-[#e8d5a3]"
+                  : "bg-transparent border border-[rgba(201,169,110,0.15)] text-[rgba(201,169,110,0.3)] cursor-not-allowed"
+                }`}
+            >
+              {added ? "Added to Cart ✓" : "Add to Cart"}
+            </button>
+
             <button
-            onClick={handleAddToCart}
-            disabled={!selectedSize}
-            className={`w-full  py-4 text-[0.6rem] font-semibold tracking-[0.3em] uppercase transition-all duration-300
-              ${selectedSize
-                ? added
-                  ? "bg-[#2a4a2a] border border-[#4a8a4a] text-[#8acc8a]"
-                  : "bg-[#c9a96e] text-[#0a0806] hover:bg-[#e8d5a3]"
-                : "bg-transparent border border-[rgba(201,169,110,0.15)] text-[rgba(201,169,110,0.3)] cursor-not-allowed"
-              }`}
-          >
-            {added ? "Added to Cart ✓" : "Add to Cart"}
-          </button>
-
-          <button className="w-full py-4  border border-[rgba(201,169,110,0.25)] text-[0.6rem] font-semibold tracking-[0.3em] uppercase text-[#9e9082] hover:border-[#c9a96e] hover:text-[#c9a96e] transition-all duration-300">
-            Add to Wishlist
-          </button>
+              onClick={() => setWishlisted(!wishlisted)}
+              className={`w-full py-4 border text-[0.6rem] font-semibold tracking-[0.3em] uppercase transition-all duration-300
+                ${wishlisted
+                  ? "border-[#c9a96e] text-[#c9a96e]"
+                  : "border-[rgba(201,169,110,0.25)] text-[#9e9082] hover:border-[#c9a96e] hover:text-[#c9a96e]"
+                }`}
+            >
+              {wishlisted ? "Saved to Wishlist ♥" : "Add to Wishlist"}
+            </button>
           </div>
-          
 
           <div className="mt-10">
             <AccordionItem title="Material & Care">
@@ -230,7 +233,6 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      {/* RELATED PRODUCTS */}
       {related.length > 0 && (
         <div className="px-6 sm:px-12 lg:px-20 py-20 border-t border-[rgba(201,169,110,0.1)]">
           <div className="flex items-center gap-4 mb-3">
@@ -246,25 +248,19 @@ export default function ProductDetail() {
         </div>
       )}
 
-      {/* SIZE GUIDE MODAL */}
       {sizeGuideOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
           <div className="absolute inset-0 bg-black/75" onClick={() => setSizeGuideOpen(false)} />
           <div className="relative w-full max-w-lg bg-[#0d0b08] border border-[rgba(201,169,110,0.18)] z-10">
-
             <div className="flex items-center justify-between px-8 py-6 border-b border-[rgba(201,169,110,0.1)]">
               <div>
                 <p className="text-[0.52rem] font-semibold tracking-[0.3em] uppercase text-[#c9a96e] mb-1">Maison</p>
                 <h3 className="font-['Cormorant_Garamond',serif] text-[1.6rem] font-light text-[#f5efe6]">Size Guide</h3>
               </div>
-              <button
-                onClick={() => setSizeGuideOpen(false)}
-                className="w-9 h-9 border border-[rgba(201,169,110,0.2)] flex items-center justify-center hover:border-[#c9a96e] transition-colors"
-              >
+              <button onClick={() => setSizeGuideOpen(false)} className="w-9 h-9 border border-[rgba(201,169,110,0.2)] flex items-center justify-center hover:border-[#c9a96e] transition-colors">
                 <X size={15} className="text-[#9e9082]" />
               </button>
             </div>
-
             <div className="px-8 py-6">
               <p className="text-[0.62rem] leading-[1.8] text-[#9e9082] mb-6 tracking-[0.03em]">
                 All measurements are in inches. Measure yourself and compare to the chart below.
@@ -289,7 +285,6 @@ export default function ProductDetail() {
                 </tbody>
               </table>
             </div>
-
             <div className="px-8 pb-6">
               <p className="text-[0.58rem] leading-[1.8] text-[#7a6240] tracking-[0.03em]">
                 Between sizes? We recommend sizing up for a more relaxed fit.

@@ -15,7 +15,8 @@ export default function Navbar() {
 
   const handleSubmit = (e) => {
     if (e.key === "Enter" && query.trim()) {
-      navigate(`/shop?q=${encodeURIComponent(query.trim())}`);
+      navigate(`/all-products?q=${encodeURIComponent(query.trim())}`);
+      e.preventDefault();
     }
     if (e.key === "Escape") {
       setSearchOpen(false);
