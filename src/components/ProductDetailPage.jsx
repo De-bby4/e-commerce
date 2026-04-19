@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { use, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useCart } from "./CartContext";
+import { useEffect } from "react";
 import { ChevronDown, ChevronUp, ArrowLeft, X } from "lucide-react";
 
 const allProducts = [
@@ -47,6 +49,7 @@ const AccordionItem = ({ title, children }) => {
 
 const RelatedCard = ({ product }) => {
   const [wishlisted, setWishlisted] = useState(false);
+  
 
   return (
     <div className="group flex flex-col cursor-pointer">
@@ -95,7 +98,7 @@ const RelatedCard = ({ product }) => {
 export default function ProductDetail() {
   const { id } = useParams();
   const product = allProducts.find((p) => p.id === Number(id));
-
+  const { addItem } = useCart();  
   const [selectedSize, setSelectedSize] = useState(null);
   const [added, setAdded] = useState(false);
   const [wishlisted, setWishlisted] = useState(false); // ← added
@@ -107,9 +110,13 @@ export default function ProductDetail() {
 
   const handleAddToCart = () => {
     if (!selectedSize) return;
+    addItem( product, selectedSize );
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   };
+  useEffect(() => {
+    setSelectedSize(null);
+  }, [id]);
 
   if (!product) {
     return (

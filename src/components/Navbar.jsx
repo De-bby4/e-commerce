@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Search, User, ShoppingBag, Menu } from "lucide-react";
-
+import { useCart } from "./CartContext";
 export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,6 +23,7 @@ export default function Navbar() {
       setQuery("");
     }
   };
+   const { totalItems, setDrawerOpen } = useCart();
 
   return (
     <nav className="w-full border-b border-[#c9a96e]/30 bg-black/70 backdrop-blur-md fixed top-0 left-0 z-50 text-white">
@@ -111,10 +112,15 @@ export default function Navbar() {
           </Link>
 
           {/* CART */}
-          <Link to="/cart" className="flex items-center gap-1 hover:text-[#c9a96e] transition">
+          <button onClick={() => setDrawerOpen(true)} className="relative flex items-center gap-1 hover:text-[#c9a96e] transition relative">
             <ShoppingBag size={18} />
+            {totalItems > 0 && (
+              <span className="absolute -top-2 -right-2 bg-[#c9a96e] text-black text-[0.5rem] font-bold w-4 h-4 rounded-full flex items-center justify-center">
+                {totalItems}
+              </span>
+            )}
             <span className="hidden md:inline">Cart</span>
-          </Link>
+          </button>
         </div>
       </div>
 
