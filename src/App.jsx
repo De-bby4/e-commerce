@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import ScrollToTop from './components/ScrollToTop'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -7,7 +7,7 @@ import BestSellers from './components/BestSellers'
 import About from './components/About'
 import AllProducts from './components/AllProductsPage'
 import ProductDetail from './components/ProductDetailPage'
-import CartDrawer from './components/Cartdrawer'
+import CartDrawer from './components/CartDrawer'
 import { CartProvider } from './components/CartContext'
 
 function Home() {
@@ -31,8 +31,9 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/all-products" element={<AllProducts />} />
+            <Route path="/shop" element={<AllProducts />} />
             <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<CartDrawer />} />
+            <Route path="/cart" element={<Navigate to="/" replace />} />
           </Routes>
         </main>
         <Footer />
