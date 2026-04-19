@@ -8,19 +8,12 @@ export default function Navbar() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [menuOpen,   setMenuOpen]   = useState(false);
   const [query,      setQuery]      = useState("");
-  const [scrolled,   setScrolled]   = useState(false);
   const desktopRef = useRef(null);
   const mobileRef  = useRef(null);
   const navigate   = useNavigate();
 
   const { totalItems, setDrawerOpen } = useCart();
   const { theme, toggle }             = useTheme();
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     if (searchOpen) {
@@ -44,11 +37,11 @@ export default function Navbar() {
 
   return (
     <nav
-      className="w-full fixed top-0 left-0 z-50 transition-all duration-300"
+      className="w-full fixed top-0 left-0 z-50"
       style={{
-        background: scrolled ? "var(--nav-bg)" : "transparent",
-        backdropFilter: scrolled ? "blur(12px)" : "none",
-        borderBottom: scrolled ? "1px solid var(--border-soft)" : "1px solid transparent",
+        background: "var(--nav-bg)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid var(--border-soft)",
       }}
     >
       {/* TOP BAR */}
