@@ -15,3 +15,69 @@ html {
 body {
   overflow-x: hidden;
 }
+
+
+/* ── DARK THEME (default) ── */
+:root,
+[data-theme="dark"] {
+  --bg-primary:    #0a0806;
+  --bg-secondary:  #0d0b08;
+  --bg-tertiary:   #14100c;
+  --bg-card:       #1a1410;
+
+  --text-primary:  #f5efe6;
+  --text-secondary:#f0e8de;
+  --text-muted:    #9e9082;
+  --text-dim:      #7a6240;
+
+  --gold:          #c9a96e;
+  --gold-light:    #e8d5a3;
+  --gold-dim:      #7a6240;
+
+  --border:        rgba(201,169,110,0.18);
+  --border-soft:   rgba(201,169,110,0.08);
+  --border-hover:  rgba(201,169,110,0.35);
+
+  --nav-bg:        rgba(10,8,6,0.85);
+  --card-bg:       #1a1410;
+
+  --sale-bg:       #b83a2a;
+  --sale-text:     #f5efe6;
+}
+
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  --bg-primary:    #faf8f5;
+  --bg-secondary:  #f2ede6;
+  --bg-tertiary:   #e8e0d4;
+  --bg-card:       #ede6db;
+
+  --text-primary:  #1a1208;
+  --text-secondary:#2a1e10;
+  --text-muted:    #6b5a44;
+  --text-dim:      #9e8a70;
+
+  --gold:          #a07840;
+  --gold-light:    #7a5c2a;
+  --gold-dim:      #b89060;
+
+  --border:        rgba(120,80,30,0.2);
+  --border-soft:   rgba(120,80,30,0.1);
+  --border-hover:  rgba(120,80,30,0.4);
+
+  --nav-bg:        rgba(250,248,245,0.9);
+  --card-bg:       #ede6db;
+
+  --sale-bg:       #c0392b;
+  --sale-text:     #ffffff;
+}
+
+/* ── BASE STYLES ── */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+}

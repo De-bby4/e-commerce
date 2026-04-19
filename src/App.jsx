@@ -9,8 +9,10 @@ import AllProducts from './components/AllProductsPage'
 import ProductDetail from './components/ProductDetailPage'
 import CartDrawer from './components/CartDrawer'
 import Contact from './components/ContactPage'
-import { CartProvider } from './components/CartContext'
 import Lookbook from './components/Lookbook'
+import Account from './components/Account'
+import { CartProvider } from './components/CartContext'
+import { ThemeProvider } from './components/ThemeContext'
 
 function Home() {
   return (
@@ -24,24 +26,27 @@ function Home() {
 function App() {
   return (
     <BrowserRouter>
-      <CartProvider>
-        <ScrollToTop />
-        <Navbar />
-        <CartDrawer />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/all-products" element={<AllProducts />} />
-            <Route path="/shop" element={<AllProducts />} />
-            <Route path="/product/:id" element={<ProductDetail />} />
-            <Route path="/cart" element={<Navigate to="/" replace />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/lookbook" element={<Lookbook />} />
-          </Routes>
-        </main>
-        <Footer />
-      </CartProvider>
+      <ThemeProvider>
+        <CartProvider>
+          <ScrollToTop />
+          <Navbar />
+          <CartDrawer />
+          <main>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/shop" element={<AllProducts />} />
+              <Route path="/all-products" element={<AllProducts />} />
+              <Route path="/product/:id" element={<ProductDetail />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/lookbook" element={<Lookbook />} />
+              <Route path="/account" element={<Account />} />
+              <Route path="/cart" element={<Navigate to="/" replace />} />
+            </Routes>
+          </main>
+          <Footer />
+        </CartProvider>
+      </ThemeProvider>
     </BrowserRouter>
   )
 }
