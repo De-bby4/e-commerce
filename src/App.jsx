@@ -8,7 +8,9 @@ import About from './components/About'
 import AllProducts from './components/AllProductsPage'
 import ProductDetail from './components/ProductDetailPage'
 import CartDrawer from './components/CartDrawer'
+import Contact from './components/ContactPage'
 import { CartProvider } from './components/CartContext'
+import Lookbook from './components/Lookbook'
 
 function Home() {
   return (
@@ -34,6 +36,8 @@ function App() {
             <Route path="/shop" element={<AllProducts />} />
             <Route path="/product/:id" element={<ProductDetail />} />
             <Route path="/cart" element={<Navigate to="/" replace />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/lookbook" element={<Lookbook />} />
           </Routes>
         </main>
         <Footer />
