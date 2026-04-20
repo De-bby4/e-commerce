@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useCart } from "./CartContext";
 import { ChevronDown, ChevronUp, ArrowLeft, X } from "lucide-react";
+import finieImg from "../assets/finie.jpeg";
 
 const allProducts = [
   { id: 1,  name: "Silk Wrap Dress",        price: 285, oldPrice: null, badge: "New",        badgeType: "gold", category: "women",       bg: "bg-[#1c1610]", description: "A fluid silk wrap dress cut for the modern woman. Designed with an adjustable tie waist and deep V-neckline, this piece transitions effortlessly from day to evening.", material: "100% Silk", care: "Dry clean only", sizes: ["XS", "S", "M", "L", "XL"] },
@@ -52,9 +53,7 @@ const RelatedCard = ({ product }) => {
     <div className="group flex flex-col cursor-pointer">
       <div className={`relative w-full aspect-[3/4] overflow-hidden ${product.bg}`}>
         <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px)" }} />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <span className="text-[0.44rem] tracking-[0.2em] uppercase" style={{ color: "rgba(201,169,110,0.18)" }}>Product Image</span>
-        </div>
+        <img src={finieImg} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center 20%" }} />
         {product.badge && (
           <span className="absolute top-3 left-3 px-2 py-[4px] text-[0.45rem] font-semibold tracking-[0.15em] uppercase"
             style={product.badgeType === "gold"
@@ -139,9 +138,7 @@ export default function ProductDetail() {
         <div className="relative w-full aspect-[3/4] lg:aspect-auto lg:min-h-[70vh] overflow-hidden mb-10 lg:mb-0">
           <div className={`absolute inset-0 ${product.bg}`}>
             <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px),repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px)" }} />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-[0.55rem] tracking-[0.25em] uppercase" style={{ color: "rgba(201,169,110,0.2)" }}>Product Image</span>
-            </div>
+            <img src={finieImg} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center 20%" }} />
           </div>
           {product.badge && (
             <span className="absolute top-5 left-5 px-3 py-[6px] text-[0.5rem] font-semibold tracking-[0.18em] uppercase z-10"

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import finieImg from "../assets/finie.jpeg";
 
 const products = [
   { id: 1, name: "Silk Wrap Dress",        price: "$285.00", oldPrice: null,     badge: "New",        badgeType: "gold",  category: "women" },
@@ -38,11 +39,7 @@ const ProductCard = ({ product }) => {
             backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(201,169,110,0.02) 60px,rgba(201,169,110,0.02) 61px)",
           }} />
 
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-[0.5rem] tracking-[0.2em] uppercase" style={{ color: "var(--border-hover)" }}>
-              Product Image
-            </span>
-          </div>
+          <img src={finieImg} alt="Look" className="absolute inset-0 w-full h-full object-cover object-top" style={{ objectPosition: "center 50%" }}/>
 
           {/* Badge */}
           {product.badge && (
