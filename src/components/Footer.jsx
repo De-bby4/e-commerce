@@ -99,7 +99,7 @@ const Footer = () => {
         </div>
 
         {/* Company */}
-        <div>
+        {/* <div>
           <div className="text-[0.58rem] font-semibold tracking-[0.3em] uppercase mb-8" style={{ color: "var(--gold)" }}>Company</div>
           <ul className="flex flex-col gap-[1.1rem] list-none">
             {["Our Story", "Sustainability", "Press", "Careers", "Affiliates"].map((item) => (
@@ -114,7 +114,7 @@ const Footer = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </div> */}
       </div>
 
       <div className="w-full h-px mb-8" style={{ background: "var(--border-soft)" }} />

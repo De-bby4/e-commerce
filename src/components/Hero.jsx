@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import finieImg from "../assets/finie.jpeg";
 
 const Hero = () => {
   return (
@@ -51,7 +50,9 @@ const Hero = () => {
         <div className="relative flex items-end justify-center overflow-hidden"
           style={{ background: "var(--bg-tertiary)" }}>
           <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px),repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px)" }} />
-         <img src={finieImg} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center 20%" }} />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <span className="text-[0.6rem] tracking-[0.3em] uppercase" style={{ color: "rgba(201,169,110,0.25)" }}>Add Model Image</span>
+          </div>
           <div className="absolute top-1/2 -translate-y-1/2 left-0 px-3 py-2 text-[0.52rem] font-semibold tracking-[0.15em] uppercase"
             style={{ background: "var(--gold)", color: "var(--bg-primary)" }}>SS '25</div>
           <div className="absolute bottom-0 left-0 right-0 h-40" style={{ background: "linear-gradient(to top, var(--bg-primary), transparent)" }} />

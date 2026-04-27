@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import finieImg from "../assets/finie.jpeg";
 
 const looks = [
   {
@@ -106,7 +105,7 @@ function LookCard({ look, index }) {
           backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px),repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px)"
         }} />
 
-        <img src={finieImg} alt="Look" className="absolute inset-0 w-full h-full object-cover object-top" style={{ objectPosition: "center 50%" }}/>
+        <img src={fini} alt="Look" className="absolute inset-0 w-full h-full object-cover object-top" style={{ objectPosition: "center 0%" }}/>
 
         <div
           className="absolute border pointer-events-none transition-all duration-700"

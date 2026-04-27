@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { SlidersHorizontal, X, ChevronDown, ChevronUp } from "lucide-react";
-import finieImg from "../assets/finie.jpeg";
+
 
 const allProducts = [
   { id: 1,  name: "Silk Wrap Dress",        price: 285, oldPrice: null, badge: "New",        badgeType: "gold", category: "women",       bg: "bg-[#1c1610]" },
@@ -33,7 +33,9 @@ const ProductCard = ({ product }) => {
     <Link to={`/product/${product.id}`} className="group flex flex-col cursor-pointer">
       <div className={`relative w-full aspect-[3/4] overflow-hidden ${product.bg}`}>
         <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px)" }} />
-        <img src={finieImg} alt="Look" className="absolute inset-0 w-full h-full object-cover object-top" style={{ objectPosition: "center 50%" }}/>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="text-[0.46rem] tracking-[0.2em] uppercase" style={{ color: "rgba(201,169,110,0.18)" }}>Product Image</span>
+        </div>
         {product.badge && (
           <span className="absolute top-3 left-3 px-3 py-[5px] text-[0.48rem] font-semibold tracking-[0.18em] uppercase"
             style={product.badgeType === "gold"
