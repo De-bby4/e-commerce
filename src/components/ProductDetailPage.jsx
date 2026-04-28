@@ -231,9 +231,9 @@ export default function ProductDetail() {
               <strong style={{ color: "var(--gold-light)" }}>Material:</strong> {product.material}<br />
               <strong style={{ color: "var(--gold-light)" }}>Care:</strong> {product.care}
             </AccordionItem>
-            <AccordionItem title="Shipping & Returns">
+            {/* <AccordionItem title="Shipping & Returns">
               Free standard shipping on orders over $150. Express shipping available at checkout. Returns accepted within 30 days of delivery in original condition.
-            </AccordionItem>
+            </AccordionItem> */}
             <AccordionItem title="Size & Fit">
               This piece is designed for a relaxed, true-to-size fit. If between sizes, we recommend sizing up. Refer to our size guide for exact measurements.
             </AccordionItem>
