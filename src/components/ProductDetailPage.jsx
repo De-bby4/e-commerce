@@ -86,8 +86,8 @@ const RelatedCard = ({ product }) => {
           onMouseLeave={e => e.currentTarget.style.color = "var(--text-secondary)"}
         >{product.name}</p>
         <div className="flex items-center gap-2">
-          <span className="text-[0.65rem] font-medium" style={{ color: "var(--gold)" }}>${product.price.toFixed(2)}</span>
-          {product.oldPrice && <span className="text-[0.6rem] line-through" style={{ color: "var(--text-muted)" }}>${product.oldPrice.toFixed(2)}</span>}
+          <span className="text-[0.65rem] font-medium" style={{ color: "var(--gold)" }}>₦{product.price.toFixed(2)}</span>
+          {product.oldPrice && <span className="text-[0.6rem] line-through" style={{ color: "var(--text-muted)" }}>₦{product.oldPrice.toFixed(2)}</span>}
         </div>
       </Link>
     </div>
@@ -170,8 +170,8 @@ export default function ProductDetail() {
             style={{ color: "var(--text-primary)" }}>{product.name}</h1>
 
           <div className="flex items-baseline gap-4 mb-6">
-            <span className="text-[1.1rem] font-medium tracking-[0.05em]" style={{ color: "var(--gold)" }}>${product.price.toFixed(2)}</span>
-            {product.oldPrice && <span className="text-[0.85rem] line-through" style={{ color: "var(--text-muted)" }}>${product.oldPrice.toFixed(2)}</span>}
+            <span className="text-[1.1rem] font-medium tracking-[0.05em]" style={{ color: "var(--gold)" }}>₦{product.price.toFixed(2)}</span>
+            {product.oldPrice && <span className="text-[0.85rem] line-through" style={{ color: "var(--text-muted)" }}>₦{product.oldPrice.toFixed(2)}</span>}
             {product.oldPrice && <span className="text-[0.5rem] font-semibold tracking-[0.15em] uppercase px-2 py-[3px]"
               style={{ color: "var(--sale-bg)", border: "1px solid var(--sale-bg)" }}>Sale</span>}
           </div>

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const products = [
-  { id: 1, name: "Silk Wrap Dress",        price: "$285.00", oldPrice: null,     badge: "New",        badgeType: "gold",  category: "women" },
-  { id: 2, name: "Tailored Blazer",         price: "$195.00", oldPrice: "$320.00", badge: "Sale",       badgeType: "red",   category: "men"   },
-  { id: 3, name: "Linen Wide-Leg Trousers", price: "$165.00", oldPrice: null,     badge: null,         badgeType: null,    category: "women" },
-  { id: 4, name: "Cashmere Knit Midi",      price: "$340.00", oldPrice: null,     badge: "Bestseller", badgeType: "gold",  category: "new"   },
-  { id: 5, name: "Draped Satin Blouse",     price: "$145.00", oldPrice: null,     badge: "New",        badgeType: "gold",  category: "new"   },
-  { id: 6, name: "Wool Overcoat",           price: "$520.00", oldPrice: "$680.00", badge: "Sale",       badgeType: "red",   category: "men"   },
-  { id: 7, name: "Pleated Midi Skirt",      price: "$210.00", oldPrice: null,     badge: null,         badgeType: null,    category: "women" },
-  { id: 8, name: "Structured Tote Bag",     price: "$390.00", oldPrice: null,     badge: "Bestseller", badgeType: "gold",  category: "new"   },
+  { id: 1, name: "Silk Wrap Dress",        price: "₦285.00", oldPrice: null,     badge: "New",        badgeType: "gold",  category: "women" },
+  { id: 2, name: "Tailored Blazer",         price: "₦195.00", oldPrice: "₦320.00", badge: "Sale",       badgeType: "red",   category: "men"   },
+  { id: 3, name: "Linen Wide-Leg Trousers", price: "₦165.00", oldPrice: null,     badge: null,         badgeType: null,    category: "women" },
+  { id: 4, name: "Cashmere Knit Midi",      price: "₦340.00", oldPrice: null,     badge: "Bestseller", badgeType: "gold",  category: "new"   },
+  { id: 5, name: "Draped Satin Blouse",     price: "₦145.00", oldPrice: null,     badge: "New",        badgeType: "gold",  category: "new"   },
+  { id: 6, name: "Wool Overcoat",           price: "₦520.00", oldPrice: "₦680.00", badge: "Sale",       badgeType: "red",   category: "men"   },
+  { id: 7, name: "Pleated Midi Skirt",      price: "₦210.00", oldPrice: null,     badge: null,         badgeType: null,    category: "women" },
+  { id: 8, name: "Structured Tote Bag",     price: "₦390.00", oldPrice: null,     badge: "Bestseller", badgeType: "gold",  category: "new"   },
 ];
 
 const tabs = [

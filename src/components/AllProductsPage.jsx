@@ -23,7 +23,7 @@ const allProducts = [
 ];
 
 const CATEGORIES  = [{ label: "All", value: "all" }, { label: "Women", value: "women" }, { label: "Men", value: "men" }, { label: "Accessories", value: "accessories" }, { label: "New In", value: "new" }];
-const PRICE_RANGES = [{ label: "Under $150", min: 0, max: 150 }, { label: "$150 – $300", min: 150, max: 300 }, { label: "$300 – $500", min: 300, max: 500 }, { label: "Over $500", min: 500, max: Infinity }];
+const PRICE_RANGES = [{ label: "Under ₦150", min: 0, max: 150 }, { label: "₦150 – ₦300", min: 150, max: 300 }, { label: "₦300 – ₦500", min: 300, max: 500 }, { label: "Over ₦500", min: 500, max: Infinity }];
 const SORT_OPTIONS = [{ label: "Featured", value: "featured" }, { label: "Price: Low – High", value: "price_asc" }, { label: "Price: High – Low", value: "price_desc" }, { label: "Newest", value: "newest" }];
 const PAGE_SIZE = 8;
 
@@ -60,8 +60,8 @@ const ProductCard = ({ product }) => {
       <div className="pt-3">
         <p className="font-['Cormorant_Garamond',serif] text-[1rem] font-light leading-snug mb-1" style={{ color: "var(--text-secondary)" }}>{product.name}</p>
         <div className="flex items-center gap-3">
-          <span className="text-[0.68rem] font-medium tracking-[0.04em]" style={{ color: "var(--gold)" }}>${product.price.toFixed(2)}</span>
-          {product.oldPrice && <span className="text-[0.62rem] line-through" style={{ color: "var(--text-muted)" }}>${product.oldPrice.toFixed(2)}</span>}
+          <span className="text-[0.68rem] font-medium tracking-[0.04em]" style={{ color: "var(--gold)" }}>₦{product.price.toFixed(2)}</span>
+          {product.oldPrice && <span className="text-[0.62rem] line-through" style={{ color: "var(--text-muted)" }}>₦{product.oldPrice.toFixed(2)}</span>}
         </div>
       </div>
     </Link>
