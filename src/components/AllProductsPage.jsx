@@ -152,7 +152,7 @@ export default function AllProducts() {
   return (
     <div className="min-h-screen font-['Montserrat',sans-serif] pt-24" style={{ background: "var(--bg-primary)" }}>
 
-      <div className="px-6 sm:px-12 lg:px-20 py-12" style={{ borderBottom: "1px solid var(--border-soft)" }}>
+      <div className="px-6 sm:px-12 lg:px-20 py-12 pt-4"  style={{ borderBottom: "1px solid var(--border-soft)" }}>
         <div className="flex items-center gap-4 mb-3">
           <span className="w-8 h-px block" style={{ background: "var(--gold)" }} />
           <span className="text-[0.55rem] font-semibold tracking-[0.35em] uppercase" style={{ color: "var(--gold)" }}>The Collection</span>

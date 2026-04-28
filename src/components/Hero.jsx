@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <section className="relative w-full min-h-screen font-['Montserrat',sans-serif] overflow-hidden"
+    <section className="relative w-full min-h-screen font-['Montserrat',sans-serif] overflow-hidden "
       style={{ background: "var(--bg-primary)" }}>
 
       {/* DESKTOP */}
@@ -65,8 +65,8 @@ const Hero = () => {
           style={{ background: "var(--bg-tertiary)" }}>
           <div className="absolute inset-0" style={{ backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 60px,rgba(201,169,110,0.015) 60px,rgba(201,169,110,0.015) 61px)" }} />
           <span className="relative text-[0.55rem] tracking-[0.25em] uppercase" style={{ color: "rgba(201,169,110,0.3)" }}>Add Model Image</span>
-          <div className="absolute top-6 left-0 px-3 py-1.5 text-[0.5rem] font-semibold tracking-[0.15em] uppercase"
-            style={{ background: "var(--gold)", color: "var(--bg-primary)" }}>SS '25</div>
+          {/* <div className="absolute top-6 left-0 px-3 py-1.5 text-[0.5rem] font-semibold tracking-[0.15em] uppercase"
+            style={{ background: "var(--gold)", color: "var(--bg-primary)" }}>SS '25</div> */}
           
         </div>
 

@@ -37,7 +37,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className="w-full fixed top-0 left-0 z-50"
+      className="w-full fixed top-0 left-0 z-50 "
       style={{
         background: "var(--nav-bg)",
         backdropFilter: "blur(12px)",
@@ -45,7 +45,7 @@ export default function Navbar() {
       }}
     >
       {/* TOP BAR */}
-      <div className="grid grid-cols-3 items-center px-6 md:px-12 lg:px-20 py-4">
+      <div className="grid grid-cols-3 items-center px-6 md:px-8 lg:px-20 py-4">
 
         {/* LEFT */}
         <div className="flex items-center gap-4">
@@ -75,7 +75,7 @@ export default function Navbar() {
         {/* LOGO */}
         <Link
           to="/"
-          className="justify-self-center font-['Cormorant_Garamond',serif] text-2xl md:text-[1.6rem] font-light tracking-[0.4em] uppercase transition-colors"
+          className="justify-self-center font-['Cormorant_Garamond',serif] text-xl md:text-[1.6rem] font-light tracking-[0.25em] md:tracking-[0.4em] uppercase transition-colors"
           style={{ color: "var(--gold-light)" }}
         >
           Maison
