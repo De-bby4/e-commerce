@@ -170,7 +170,7 @@ export default function Navbar() {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleSubmit}
           placeholder="Search products..."
-          className="w-full px-4 py-2 rounded-md bg-transparent outline-none text-sm"
+          className="w-full px-4 py-2 rounded-md bg-transparent outline-none text-base"
           style={{
             border: "1px solid var(--gold)",
             color: "var(--text-primary)",
