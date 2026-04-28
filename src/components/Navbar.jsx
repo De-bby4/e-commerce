@@ -75,10 +75,10 @@ export default function Navbar() {
         {/* LOGO */}
         <Link
           to="/"
-          className="justify-self-center text-2xl md:text-3xl font-serif italic transition-colors"
-          style={{ color: "var(--text-primary)" }}
+          className="justify-self-center font-['Cormorant_Garamond',serif] text-2xl md:text-[1.6rem] font-light tracking-[0.4em] uppercase transition-colors"
+          style={{ color: "var(--gold-light)" }}
         >
-          Crovia
+          Maison
         </Link>
 
         {/* RIGHT */}

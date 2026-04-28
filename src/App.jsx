@@ -10,9 +10,10 @@ import ProductDetail from './components/ProductDetailPage'
 import CartDrawer from './components/CartDrawer'
 import Contact from './components/ContactPage'
 import Lookbook from './components/Lookbook'
-import Account from './components/Account'
+// import Account from './components/Account'
 import { CartProvider } from './components/CartContext'
 import { ThemeProvider } from './components/ThemeContext'
+// import Checkout from './components/Checkout'
 
 function Home() {
   return (
@@ -40,8 +41,9 @@ function App() {
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/lookbook" element={<Lookbook />} />
-              <Route path="/account" element={<Account />} />
+              {/* <Route path="/account" element={<Account />} /> */}
               <Route path="/cart" element={<Navigate to="/" replace />} />
+              {/* <Route path="/checkout" element={<Checkout />} /> */}
             </Routes>
           </main>
           <Footer />

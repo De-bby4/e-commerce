@@ -67,9 +67,7 @@ const Hero = () => {
           <span className="relative text-[0.55rem] tracking-[0.25em] uppercase" style={{ color: "rgba(201,169,110,0.3)" }}>Add Model Image</span>
           <div className="absolute top-6 left-0 px-3 py-1.5 text-[0.5rem] font-semibold tracking-[0.15em] uppercase"
             style={{ background: "var(--gold)", color: "var(--bg-primary)" }}>SS '25</div>
-          <div className="absolute bottom-0 left-0 right-0 py-2 px-4" style={{ background: "rgba(10,8,6,0.7)" }}>
-            <p className="text-[0.5rem] tracking-[0.2em] uppercase text-center" style={{ color: "var(--gold)" }}>Free Shipping on Orders Over $150</p>
-          </div>
+          
         </div>
 
         <div className="relative flex flex-col justify-center flex-1 px-6 pt-8 pb-12"

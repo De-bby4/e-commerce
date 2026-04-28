@@ -105,7 +105,7 @@ function LookCard({ look, index }) {
           backgroundImage: "repeating-linear-gradient(0deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px),repeating-linear-gradient(90deg,transparent,transparent 80px,rgba(201,169,110,0.015) 80px,rgba(201,169,110,0.015) 81px)"
         }} />
 
-        <img src={fini} alt="Look" className="absolute inset-0 w-full h-full object-cover object-top" style={{ objectPosition: "center 0%" }}/>
+        {/* <img src={fini} alt="Look" className="absolute inset-0 w-full h-full object-cover object-top" style={{ objectPosition: "center 0%" }}/> */}
 
         <div
           className="absolute border pointer-events-none transition-all duration-700"
@@ -292,7 +292,7 @@ export default function Lookbook() {
           style={{ color: "rgba(201,169,110,0.04)" }}>
           Shop Now
         </span>
-        <div className="relative z-10">
+        <div className="relative z-10 ">
           <div className="flex items-center justify-center gap-4 mb-5">
             <span className="w-8 h-px block" style={{ background: "var(--gold)" }} />
             <span className="text-[0.55rem] font-semibold tracking-[0.35em] uppercase" style={{ color: "var(--gold)" }}>
@@ -300,13 +300,13 @@ export default function Lookbook() {
             </span>
             <span className="w-8 h-px block" style={{ background: "var(--gold)" }} />
           </div>
-          <h2 className="font-['Cormorant_Garamond',serif] text-[3rem] sm:text-[4.5rem] font-light mb-6 leading-none"
+          <h2 className="font-['Cormorant_Garamond',serif] text-[3rem] sm:text-[4.5rem] font-light pb-9 leading-none"
             style={{ color: "var(--text-primary)" }}>
             Ready to wear<br /><em className="italic" style={{ color: "var(--gold-light)" }}>your story?</em>
           </h2>
-          <p className="text-[0.7rem] leading-[2] max-w-sm mx-auto mb-10" style={{ color: "var(--text-muted)" }}>
+          {/* <p className="text-[0.7rem] leading-[2] max-w-sm mx-auto mb-10" style={{ color: "var(--text-muted)" }}>
             Every piece from these looks is available now. Shop the full collection and build your own narrative.
-          </p>
+          </p> */}
           <Link
             to="/shop"
             className="inline-flex items-center gap-3 px-12 py-4 text-[0.6rem] font-semibold tracking-[0.3em] uppercase transition-all duration-300 group"

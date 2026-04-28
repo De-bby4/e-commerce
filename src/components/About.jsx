@@ -19,8 +19,8 @@ const About = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[90vh]">
         <div className="flex flex-col justify-center px-6 sm:px-12 lg:px-20 py-20 lg:py-28 relative">
-          <span className="absolute top-10 right-0 font-['Cormorant_Garamond',serif] text-[12rem] font-light leading-none select-none pointer-events-none"
-            style={{ color: "rgba(201,169,110,0.04)" }}>25</span>
+          {/* <span className="absolute top-10 right-0 font-['Cormorant_Garamond',serif] text-[12rem] font-light leading-none select-none pointer-events-none"
+            style={{ color: "rgba(201,169,110,0.04)" }}>25</span> */}
 
           <div className="flex items-center gap-4 mb-5">
             <span className="w-8 h-px block" style={{ background: "var(--gold)" }} />
